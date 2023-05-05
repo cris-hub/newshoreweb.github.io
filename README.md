@@ -48,6 +48,10 @@ git clone https://github.com/cris-hub/newshoreweb.github.io
 ## Funcionamiento multi filtro
 ![filter](docs/multiscalas.jfif)
 
+## divisas cambio
+![filter](docs/currency.png)
+
+
 
 
 
