@@ -1,0 +1,199 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+      <button type="button" mat-stroked-button color="warn" (click)="onSalir()">Salir</button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-card id="persona">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formViaje">
+      <section>
+        <div class="row">
+          <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xs-12">
+            <mat-form-field>
+              <mat-select formControlName="typeFlight" placeholder="type of trip">
+                <mat-option [value]="'0'">One way</mat-option>
+                <mat-option [value]="'1'">Multi City</mat-option>
+                <mat-option [value]="'2'">Round trip</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="formViaje.get('typeFlight').value != '1'" class="col-md-2 col-sm-2 col-lg-2 col-xl-2 col-xs-2">
+            <mat-form-field>
+              <mat-select formControlName="scales" placeholder="Escalas">
+                <mat-option [value]="1">Directo</mat-option>
+                <mat-option *ngFor="let value of [2,3,4,5]" [value]="value">{{value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xs-2">
+            <mat-form-field>
+              <mat-label>Moneda</mat-label>
+              <mat-select formControlName="currency" (change)="onChangeMoneda()">
+                <mat-option *ngFor="let moneda of listMonedas" [value]="moneda">
+                  {{moneda}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+          <div *ngIf="formViaje.get('typeFlight').value == '1'">
+            <div formArrayName="multitrip">
+              <div *ngFor=" let item of multitrip.controls; let i=index" class="row">
+
+                <div [formGroupName]="i" class="col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xs-12">
+                  <mat-form-field>
+                    <input maxlength="3" type="text" matInput placeholder="Origin"
+                      onkeyup="javascript:this.value=this.value.toUpperCase();"
+                      [value]="this.multitrip.controls[i].get('origin').value" [matAutocomplete]="autoorigin"
+                      formControlName="origin">
+                    <mat-autocomplete #autoorigin="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptionorigin | async " [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="this.multitrip.controls[i].get('origin').hasError('required')">
+                      Field is required
+                    </mat-error>
+                    <mat-error *ngIf="this.multitrip.controls[i].get('origin').hasError('minlength')">
+                      Minimun is three characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div [formGroupName]="i" class="col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xs-12">
+                  <mat-form-field>
+                    <input maxlength="3" type="text" matInput placeholder="Destination"
+                      [value]="this.multitrip.controls[i].get('destination').value"
+                      onkeyup="javascript:this.value=this.value.toUpperCase();" [matAutocomplete]="autodestination"
+                      formControlName="destination">
+                    <mat-autocomplete #autodestination="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptionsdestination | async " [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="this.multitrip.controls[i].get('destination').hasError('required')">
+                      Field is required
+                    </mat-error>
+                    <mat-error *ngIf="this.multitrip.controls[i].get('destination').hasError('minlength')">
+                      Minimun is three characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 col-xs-6">
+                  <button type="button" mat-icon-button (click)="addItem()">
+                    <mat-icon>plus_one</mat-icon>
+                  </button>
+                </div>
+
+                <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 col-xs-6">
+                  <button type="button" mat-icon-button color="warn" [disabled]="i == 0" (click)="deleteItem(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="formViaje.get('typeFlight').value != '1'" class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xs-12">
+              <mat-form-field>
+                <input maxlength="3" type="text" matInput placeholder="origin"
+                  onkeyup="javascript:this.value=this.value.toUpperCase();" [matAutocomplete]="autoorigin"
+                  formControlName="origin">
+                <mat-autocomplete #autoorigin="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionorigin | async " [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="this.formViaje.get('origin').hasError('required')">
+                  Field is required
+                </mat-error>
+                <mat-error *ngIf="this.formViaje.get('origin').hasError('minlength')">
+                  Minimun is three characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xs-12">
+
+              <mat-form-field>
+                <input maxlength="3" type="text" matInput placeholder="destination"
+                  onkeyup="javascript:this.value=this.value.toUpperCase();" [matAutocomplete]="autodestination"
+                  formControlName="destination">
+                <mat-autocomplete #autodestination="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsdestination | async " [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="this.formViaje.get('destination').hasError('required')">
+                  Field is required
+                </mat-error>
+                <mat-error *ngIf="this.formViaje.get('destination').hasError('minlength')">
+                  Minimun is three characters
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+
+
+
+
+          <button type="submit" mat-flat-button color="primary">Buscar</button>
+
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card *ngIf="dataFlight?.flights?.length>0">
+        <mat-card-header *ngIf="dataFlight.origin && dataFlight.destination">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-subtitle>origin: {{dataFlight.origin}} - destination: {{dataFlight.destination}}</mat-card-subtitle>
+          <mat-card-title>price: {{dataFlight.price | currency: formViaje.get("currency").value
+            :'code'}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let s of dataFlight.flights" class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+              <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%"
+                style="width:100%">
+                <tr>
+                  <th>Origin</th>
+                  <th>Destination</th>
+                  <th>Price </th>
+                  <th>Flight Number</th>
+                  <th>Flight Carrier</th>
+                </tr>
+                <tr *ngFor="let s of s">
+                  <td>{{s.origin}}</td>
+                  <td>{{s.destination}}</td>
+                  <td>{{s.price | currency:"USD"}}</td>
+                  <td>{{s.transport.flightNumber}}</td>
+                  <td>{{s.transport.flightCarrier}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+
+
+      <br>
+
+    </form>
+  </mat-card>
+</div>
