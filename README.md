@@ -1,27 +1,56 @@
-# CRUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+# Newshore 
+## Newshore Prueba Ingreso Fullstack 2022
 
-## Development server
+credentials 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+user: admin 
+password: admin
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation Frontend 
 
-## Running end-to-end tests
+Install my-project with npm
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone https://github.com/cris-hub/newshoreweb.github.io
+
+  cd front-end
+  npm install
+  ng serve -o
+
+```
+
+    
+
+# Screenshots funcionamiento
+## credentials 
+### user: admin 
+### password: admin
+
+![login](docs/login.png)
+
+## Filtro
+![filter](docs/filter.png)
+
+## ida y vuelta con filtro de scalas
+![filter](docs/goandreturnwithfilterofscales.png)
+
+## ida y vuelta 
+![filter](docs/go%20and%20return%20with%20scales.png)
+
+## Funcionamiento multi filtro
+![filter](docs/multiscalas.jfif)
+
+
+
+
+
+
+
