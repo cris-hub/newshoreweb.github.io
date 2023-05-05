@@ -157,9 +157,11 @@
       <mat-divider></mat-divider>
       <br>
       <mat-card *ngIf="dataFlight?.flights?.length>0">
-        <mat-card-header *ngIf="dataFlight.origin && dataFlight.destination">
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-subtitle>origin: {{dataFlight.origin}} - destination: {{dataFlight.destination}}</mat-card-subtitle>
+        <mat-card-header 
+        >
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-subtitle *ngIf="dataFlight.origin && dataFlight.destination">origin: {{dataFlight.origin}} - destination: {{dataFlight.destination}}</mat-card-subtitle>
+        
           <mat-card-title>price: {{dataFlight.price | currency: formViaje.get("currency").value
             :'code'}}</mat-card-title>
         </mat-card-header>
