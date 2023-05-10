@@ -7,6 +7,9 @@ credentials
 user: admin 
 password: admin
 
+# DEMO
+
+https://cris-hub.github.io/newshoreweb.github.io
 
 
 
