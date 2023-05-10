@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: true,\n  base_url: 'https://newshoreairapi.azurewebsites.net/api',\n  base_img: 'assets/img/',\n  key_security: 'ABC$$$$CFDRTYRYGHHG///DFDFdFFDOIOIOIJJHJGHGHG1097642udssdsds(fdfdfd)fdfdfdfdfwewewdsdcsankmsdnjhkd'\n};","map":null,"metadata":{},"sourceType":"module"}
